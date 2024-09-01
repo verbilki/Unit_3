@@ -1,6 +1,6 @@
 ## Приложение 'Анализ банковских транзакций'
 
-Этот проект представляет собой Домашнее Задание по Уроку 12-2 курса по Python на платформе SkyPro
+Этот проект представляет собой Домашнее Задание по Уроку 13-1 курса по Python на платформе SkyPro
 ученика Олега Жадана (поток Prof 40.0).
 
 ## Инструкция по установке
@@ -111,12 +111,11 @@ Raises: `json.JSONDecodeError`
 #### функция get_transaction_amount
 
 Назначение: получить объём заданной транзакции в рублях с учётом возможной конвертации валюты.
-Args:
-transaction (dict[str, Any]): A dictionary representing a transaction.
+Args: transaction (dict[str, Any]): A dictionary representing a transaction.
 
-    Returns:
-        float: The amount of the transaction. If the transaction is in USD, an exchange rate is
-        requested from the external API.
+Returns:
+  float: The amount of the transaction. If the transaction is in USD, an exchange rate is
+  requested from the external API.
 
 ### Модуль external_api.py
 
@@ -142,19 +141,19 @@ Returns: `float`: The exchange rate.
   The `BANK_CARD_LAST_VISIBLE_DIGITS` environment variable is used to determine the number of visible digits
   at the end of the masked card number. If the variable is not set, the default value is 4.
 
-  - `get_mask_account(account_number: str) -> str`:
-    This function takes a bank account number as input and returns a masked version of it.
-    The masked account number will have the first 2 characters visible, followed by "**", 
-    and the last 4 digits visible. If the input account number is empty, an empty string is returned.
-    The function also logs relevant information using the provided logger.
+- `get_mask_account(account_number: str) -> str`:
+  This function takes a bank account number as input and returns a masked version of it.
+  The masked account number will have the first 2 characters visible, followed by "**", 
+  and the last 4 digits visible. If the input account number is empty, an empty string is returned.
+  The function also logs relevant information using the provided logger.
 
-    If the account number contains non-digit characters, a `ValueError` is raised with a message
-    indicating that the account number should only contain digits. If the account number has a length
-    other than 20, a `ValueError` is raised with a message indicating that the account number should be 20 digits long.
+  If the account number contains non-digit characters, a `ValueError` is raised with a message
+  indicating that the account number should only contain digits. If the account number has a length
+  other than 20, a `ValueError` is raised with a message indicating that the account number should be 20 digits long.
 
-    The function uses the `dotenv` library to load environment variables from a `.env` file.
-    The `BANK_CARD_LAST_VISIBLE_DIGITS` environment variable is used to determine the number of visible digits
-    at the end of the masked account number. If the variable is not set, the default value is 4.
+  The function uses the `dotenv` library to load environment variables from a `.env` file.
+  The `BANK_CARD_LAST_VISIBLE_DIGITS` environment variable is used to determine the number of visible digits
+  at the end of the masked account number. If the variable is not set, the default value is 4.
 
 ### Модуль tests/test_utils.py 
 
