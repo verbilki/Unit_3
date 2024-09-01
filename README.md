@@ -49,7 +49,8 @@ source ./venv/bin/activate
 poetry install
 ```
 
-## 4. Установить линтер flake8, анализатор статического кода mypy, форматтеры (black, isort) на основании файла конфигурации pyproject.toml.
+4. Установить линтер flake8, анализатор статического кода mypy, форматтеры (black, isort)
+на основании файла конфигурации pyproject.toml.
 
 <a id="flake8-mypy-config"></a>
 Пример настройки flake8, black, isort и mypy в файле pyproject.toml:
@@ -128,18 +129,32 @@ Returns: `float`: The exchange rate.
 ### Модуль masks.py
 
 - `get_mask_card_number(card_number: str) -> str`:
-  This function takes a bank card number as input and returns a masked version of it. The masked card number will have the first 6 digits, followed by "******", and the last 4 digits visible. If the input card number is empty, an empty string is returned. The function also logs relevant information using the provided logger.
+  This function takes a bank card number as input and returns a masked version of it.
+  The masked card number will have the first 6 digits, followed by "******", and the last 4 digits visible.
+  If the input card number is empty, an empty string is returned. The function also logs relevant information
+  using the provided logger.
 
-  If the card number contains non-digit characters, a `ValueError` is raised with a message indicating that the card number should only contain digits. If the card number has a length other than 16, a `ValueError` is raised with a message indicating that the card number should be 16 digits long.
+  If the card number contains non-digit characters, a `ValueError` is raised with a message indicating
+  that the card number should only contain digits. If the card number has a length other than 16,
+  a `ValueError` is raised with a message indicating that the card number should be 16 digits long.
 
-  The function uses the `dotenv` library to load environment variables from a `.env` file. The `BANK_CARD_LAST_VISIBLE_DIGITS` environment variable is used to determine the number of visible digits at the end of the masked card number. If the variable is not set, the default value is 4.
+  The function uses the `dotenv` library to load environment variables from a `.env` file.
+  The `BANK_CARD_LAST_VISIBLE_DIGITS` environment variable is used to determine the number of visible digits
+  at the end of the masked card number. If the variable is not set, the default value is 4.
 
-- `get_mask_account(account_number: str) -> str`:
-  This function takes a bank account number as input and returns a masked version of it. The masked account number will have the first 2 characters visible, followed by "**", and the last 4 digits visible. If the input account number is empty, an empty string is returned. The function also logs relevant information using the provided logger.
+  - `get_mask_account(account_number: str) -> str`:
+    This function takes a bank account number as input and returns a masked version of it.
+    The masked account number will have the first 2 characters visible, followed by "**", 
+    and the last 4 digits visible. If the input account number is empty, an empty string is returned.
+    The function also logs relevant information using the provided logger.
 
-  If the account number contains non-digit characters, a `ValueError` is raised with a message indicating that the account number should only contain digits. If the account number has a length other than 20, a `ValueError` is raised with a message indicating that the account number should be 20 digits long.
+    If the account number contains non-digit characters, a `ValueError` is raised with a message
+    indicating that the account number should only contain digits. If the account number has a length
+    other than 20, a `ValueError` is raised with a message indicating that the account number should be 20 digits long.
 
-  The function uses the `dotenv` library to load environment variables from a `.env` file. The `BANK_CARD_LAST_VISIBLE_DIGITS` environment variable is used to determine the number of visible digits at the end of the masked account number. If the variable is not set, the default value is 4.
+    The function uses the `dotenv` library to load environment variables from a `.env` file.
+    The `BANK_CARD_LAST_VISIBLE_DIGITS` environment variable is used to determine the number of visible digits
+    at the end of the masked account number. If the variable is not set, the default value is 4.
 
 ### Модуль tests/test_utils.py 
 
@@ -155,25 +170,31 @@ Returns: `float`: The exchange rate.
   This test function checks if the `get_mask_card_number` function returns an empty string when given an empty input.
 
 - `test_get_mask_card_number_non_digit_characters()`:
-  This test function checks if the `get_mask_card_number` function raises a `ValueError` when given a card number containing non-digit characters.
+  This test function checks if the `get_mask_card_number` function raises a `ValueError`
+  when given a card number containing non-digit characters.
 
 - `test_get_mask_card_number_incorrect_length()`:
-  This test function checks if the `get_mask_card_number` function raises a `ValueError` when given a card number with an incorrect length.
+  This test function checks if the `get_mask_card_number` function raises a `ValueError`
+  when given a card number with an incorrect length.
 
 - `test_get_mask_card_number_correct_input()`:
-  This test function checks if the `get_mask_card_number` function returns the expected masked card number when given a valid card number.
+  This test function checks if the `get_mask_card_number` function returns the expected masked card number
+  when given a valid card number.
 
 - `test_get_mask_account_empty_input()`:
   This test function checks if the `get_mask_account` function returns an empty string when given an empty input.
 
 - `test_get_mask_account_non_digit_characters()`:
-  This test function checks if the `get_mask_account` function raises a `ValueError` when given an account number containing non-digit characters.
+  This test function checks if the `get_mask_account` function raises a `ValueError` 
+  when given an account number containing non-digit characters.
 
 - `test_get_mask_account_incorrect_length()`:
-  This test function checks if the `get_mask_account` function raises a `ValueError` when given an account number with an incorrect length.
+  This test function checks if the `get_mask_account` function raises a `ValueError` 
+  when given an account number with an incorrect length.
 
 - `test_get_mask_account_correct_input()`:
-  This test function checks if the `get_mask_account` function returns the expected masked account number when given a valid account number.
+  This test function checks if the `get_mask_account` function returns the expected masked account number
+  when given a valid account number.
 
 ## 7. Тестирование
 
