@@ -83,10 +83,14 @@ pip install pandas-stubs
     + [Модуль masks.py](#модуль-masks-py)
     + [Модуль external_api.py](#модуль-external_api-py)
         - [Функция get_exchange_rate](#функция-get_exchange_rate)
+    + [Модуль read_from_file.py](#модуль-read_from_file-py)
+        - [Функция test_read_transactions_from_csv](#функция-test_read_transactions_from_csv)
+        - [Функция test_read_transactions_from_excel](#функция-test_read_transactions_from_excel)
 
 * [папка tests](#tests)
     + [Модуль глобальных фикстур conftest.py](#conftestpy)
     + [Модуль tests/test_masks.py](#модуль-tests-test_masks-py)
+    + [Модуль tests/test_read_from_file.py](#модуль-tests-read_from_file-py)
 
 ## Папка src
 
@@ -155,6 +159,46 @@ Returns: `float`: The exchange rate.
   The `BANK_CARD_LAST_VISIBLE_DIGITS` environment variable is used to determine the number of visible digits
   at the end of the masked account number. If the variable is not set, the default value is 4.
 
+### read_transactions_from_csv(file_path: str) -> list[dict[str, Any]]
+
+Reads transactions from a CSV file specified by the `file_path` argument.
+
+#### Arguments
+
+- `file_path` (str): The path to the CSV file containing transactions. The file should be semicolon-separated.
+
+#### Returns
+
+- list[dict[str, Any]]: A list of dictionaries representing transactions.
+  Each dictionary contains keys for the transaction's ID, state, date, operation amount, description,
+  from account, and to account. Returns an empty list if the file cannot be opened
+  or if the deserialized data is not a list.
+
+#### Note
+
+Any keys with a value of 0 are removed from the final dictionary.
+
+
+### read_transactions_from_excel(file_path: str) -> list[dict[str, Any]]
+
+Reads transactions from an Excel file specified by the `file_path` argument.
+
+#### Arguments
+
+- `file_path` (str): The path to the Excel file containing transactions.
+  The file should be in a format compatible with pandas' read_excel function.
+
+#### Returns
+
+- list[dict[str, Any]]: A list of dictionaries representing transactions.
+  Each dictionary contains keys for the transaction's ID, state, date, operation amount, description, 
+  from account, and to account. Returns an empty list if the file cannot be opened
+  or if the deserialized data is not a list.
+
+#### Note
+
+Any keys with a value of 0 are removed from the final dictionary.
+
 ### Модуль tests/test_utils.py 
 
 Тесты для функций модуля src/utils.py.
@@ -194,6 +238,34 @@ Returns: `float`: The exchange rate.
 - `test_get_mask_account_correct_input()`:
   This test function checks if the `get_mask_account` function returns the expected masked account number
   when given a valid account number.
+
+
+### Модуль tests/test_read_from_file.py
+
+This module contains unit tests for functions in the src/read_from_file module.
+
+#### Функция test_read_transactions_from_csv
+
+Description: This function tests the read_transactions_from_csv function by mocking the pd.read_csv function.
+It asserts that the function returns the expected list of transactions when given an existing CSV file.
+
+Parameters:
+mock_read_csv (MagicMock): A mock object for pd.read_csv function.
+get_df (pd.DataFrame): A pandas DataFrame containing the expected transactions.
+
+Returns: None. The function asserts the behavior of read_transactions_from_csv function.
+
+#### Функция test_read_transactions_from_excel
+
+Description: This function tests the read_transactions_from_excel function by mocking the pd.read_excel function.
+It asserts that the function returns the expected list of transactions when given an existing Excel file.
+
+Parameters:
+mock_read_excel (MagicMock): A mock object for pd.read_excel function.
+get_df (pd.DataFrame): A pandas DataFrame containing the expected transactions.
+
+Returns: None. The function asserts the behavior of read_transactions_from_excel function.
+
 
 ## 7. Тестирование
 
