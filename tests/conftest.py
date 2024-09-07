@@ -5,7 +5,6 @@ import pandas as pd
 import pytest
 
 
-@pytest.fixture
 def operations_data() -> list[dict[str, str | int]]:
     return [
         {"id": 41428829, "state": "EXECUTED", "date": "20190703"},
@@ -89,6 +88,11 @@ def transactions() -> list[dict[str, Any]]:
             "to": "Счет 14211924144426031657",
         },
     ]
+
+
+@pytest.fixture
+def card_number_range() -> tuple[int, int]:
+    return 1234567890123456, 1234567890123459
 
 
 @pytest.fixture

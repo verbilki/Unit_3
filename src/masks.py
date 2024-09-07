@@ -32,7 +32,7 @@ def get_mask_card_number(card_number: str) -> str:
     bank_card_last_visible_digits = int(os.getenv("BANK_CARD_LAST_VISIBLE_DIGITS", "4"))
     masked_card_number = card_number[:6] + "******" + card_number[-bank_card_last_visible_digits:]
     formatted_mask_card_number = " ".join(
-        masked_card_number[i: i + bank_card_last_visible_digits]
+        masked_card_number[i : i + bank_card_last_visible_digits]
         for i in range(0, len(masked_card_number), bank_card_last_visible_digits)
     )
     logger.info(f"Создана маска {formatted_mask_card_number} для номера банковской карты.")
@@ -55,8 +55,9 @@ def get_mask_account(account_number: str) -> str:
         raise ValueError("Номер счета должен состоять только из цифр.")
 
     if len(account_number) != 20:
-        logger.critical(f"Номера счёта {account_number} имеет размер ({len(account_number)}), "
-                        "что отличается от требуемого 20.")
+        logger.critical(
+            f"Номера счёта {account_number} имеет размер ({len(account_number)}), " "что отличается от требуемого 20."
+        )
         raise ValueError("Номер счета должен состоять из 20 цифр.")
 
     load_dotenv()
