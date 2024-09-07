@@ -12,7 +12,7 @@ git@github.com:verbilki/Unit_3.git
 ```
 
 Найти в корне проекта файл .env_template, скопировать его в .env и заполнить конфиденциальными данными
-(например, для ключа API_KEY ввести токен подключения к API конвертации валют).
+(например, для ключа API_KEY ввести токен подключения к API конвертации валют ).
 
 1. Создать в PyCharm виртуальное окружение
 
@@ -72,11 +72,16 @@ poetry add python-dotenv
 
 pip install pandas
 pip install pandas-stubs
+pip install openpyxl
 ```
 
-6. Функциональные модули
+6. Запуск приложения
+Для запуска приложения необходимо запустить на исполнение модуль src/main.py, состоящий из единственной функции main().
+
+7. Функциональные модули
 
 * [Папка src](#папка-src)
+    + [Головной модуль main.py](#модуль-main-py)
     + [Модуль utils.py](#модуль-utils-py)
         - [Функция read_transactions_from_json](#read_transactions_from_json)
         - [Функция get_transaction_amount](#get_transaction_amount)
@@ -86,11 +91,13 @@ pip install pandas-stubs
     + [Модуль read_from_file.py](#модуль-read_from_file-py)
         - [Функция test_read_transactions_from_csv](#функция-test_read_transactions_from_csv)
         - [Функция test_read_transactions_from_excel](#функция-test_read_transactions_from_excel)
+   + [Модуль widget.py](#модуль-widget-py)
 
 * [папка tests](#tests)
     + [Модуль глобальных фикстур conftest.py](#conftestpy)
     + [Модуль tests/test_masks.py](#модуль-tests-test_masks-py)
     + [Модуль tests/test_read_from_file.py](#модуль-tests-read_from_file-py)
+    + [Модуль tests/test_widget.py](#модуль-tests-test_widget-py)
 
 ## Папка src
 
@@ -199,6 +206,44 @@ Reads transactions from an Excel file specified by the `file_path` argument.
 
 Any keys with a value of 0 are removed from the final dictionary.
 
+### Модуль widget.py
+================
+
+#### Функция mask_account_card
+Description: The mask_account_card function takes a card or account number as input
+             and returns a masked version of the number.
+
+Parameters: card_or_acc_number (str): The card or account number to be masked.
+Returns: str: The masked card or account number.
+
+Example:
+```
+masked_number = mask_account_card("Visa Platinum 7000792289606361")
+print(masked_number)  # Output: "Visa Platinum 7000 79** **** 6361"
+```
+
+#### Функция format_str_date
+Description: The format_str_date function takes a date string as input and returns a formatted date string.
+
+Parameters: date_string (str): The date string to be formatted.
+Returns: str: The formatted date string.
+Example:
+```
+formatted_date = format_str_date("2023-01-01T12:34:56.789012")
+print(formatted_date)  # Output: "2023-01-01 12:34:56.789012"
+```
+Note: The format_str_date function is not fully implemented in the provided code snippet, 
+so the example output is hypothetical.
+
+Usage: To use the functions in the widget module, simply import the module and call the desired function:
+
+```
+from src.widget import mask_account_card, format_str_date
+
+masked_number = mask_account_card("Visa Platinum 7000792289606361")
+formatted_date = format_str_date("2023-01-01T12:34:56.789012")
+```
+
 ### Модуль tests/test_utils.py 
 
 Тесты для функций модуля src/utils.py.
@@ -267,7 +312,7 @@ get_df (pd.DataFrame): A pandas DataFrame containing the expected transactions.
 Returns: None. The function asserts the behavior of read_transactions_from_excel function.
 
 
-## 7. Тестирование
+## 7. Настройка и использование фреймворка unit-тестирования Pytest
 
 Исходный код модулей покрыт юнит-тестами Pytest на более, чем 88%. Для запуска выполните команды:
 

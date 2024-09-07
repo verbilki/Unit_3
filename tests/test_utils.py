@@ -1,15 +1,16 @@
 import json
 import tempfile
 from typing import Any
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
-from src.utils import read_transactions_from_json, get_transaction_amount
+from src.utils import get_transaction_amount, read_transactions_from_json
 
 
 @patch("src.utils.json.load")
 @patch("src.utils.open")
-def test_read_transactions_from_json(mock_open: MagicMock, mock_json_load: MagicMock,
-                                     transactions: list[dict]) -> None:
+def test_read_transactions_from_json(
+    mock_open: MagicMock, mock_json_load: MagicMock, transactions: list[dict]
+) -> None:
     """
     Test the function `read_transactions_from_json` when it is given an existing JSON-file.
 
@@ -155,6 +156,7 @@ def test_get_transaction_amount_non_rub_transactions(mock_get_exchange_rate: Mag
     }
     result = get_transaction_amount(usd_transaction)
     assert result == 2149.32
+
 
 # @pytest.mark.parametrize("return_status, return_result", [(False, "Unauthorized"), (False, "Something went wrong")])
 # @patch("src.utils.get_exchange_rate")

@@ -17,7 +17,7 @@ logger.addHandler(file_handler)
 
 def read_transactions_from_json(json_file_path: str) -> list[dict]:
     """
-    Reads transactions from a JSON file specified by the `json_file_path` argument.\
+    Reads transactions from a JSON file specified by the `json_file_path` argument.
     Args:
         json_file_path (str): The path to the JSON file containing transactions.
     Returns:
@@ -83,13 +83,18 @@ def get_transaction_amount(transaction: dict[str, Any]) -> float:
     return float(rub_amount)
 
 
-# if __name__ == "__main__":
-#     transactions = read_transactions_from_json(
-#         os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'operations.json'))
-#     for transaction in transactions:
-#         print(transaction)
-#
-#     for transaction in transactions[:5]:
-#         if transaction.get("operationAmount", {}).get("currency", {}).get("code", "") != "RUB":
-#             print(transaction["id"], transaction.get("operationAmount", {}).get("currency", {}).get("code"),
-#                   transaction.get("operationAmount", {}).get("amount"), get_transaction_amount(transaction))
+if __name__ == "__main__":
+    transactions = read_transactions_from_json(
+        os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "operations.json")
+    )
+    for transaction in transactions:
+        print(transaction)
+
+    for transaction in transactions[:5]:
+        if transaction.get("operationAmount", {}).get("currency", {}).get("code", "") != "RUB":
+            print(
+                transaction["id"],
+                transaction.get("operationAmount", {}).get("currency", {}).get("code"),
+                transaction.get("operationAmount", {}).get("amount"),
+                get_transaction_amount(transaction),
+            )

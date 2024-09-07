@@ -24,14 +24,14 @@ def read_transactions_from_csv(file_path: str) -> list[dict[str, Any]]:
             {
                 "id": int(i.get("id", "0")),
                 "state": i.get("state", "UNKNOWN"),
-                "date": i.get("date"),
+                "date": i.get("date", "1900-01-01T00:00:00"),
                 "operationAmount": {
                     "amount": int(i.get("amount", "0")),
-                    "currency": {"name": i.get("currency_name"), "code": i.get("currency_code")},
+                    "currency": {"name": i.get("currency_name", "UNKNOWN"), "code": i.get("currency_code", "XXX")},
                 },
                 "description": i.get("description"),
-                "from": i.get("from"),
-                "to": i.get("to"),
+                "from": i.get("from", "0" * 16),
+                "to": i.get("to", "0" * 16),
             }
             for i in transactions_dict
         ]

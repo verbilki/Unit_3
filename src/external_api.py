@@ -20,7 +20,10 @@ def get_exchange_rate(amount: float, from_currency: str, to_currency: str = "RUB
     """
     load_dotenv()
 
-    url = f"{os.getenv("API_URL", "https://api.apilayer.com/exchangerates_data")}/convert?to={to_currency}&from={from_currency}&amount={amount}"
+    url = (
+        f"{os.getenv("API_URL", "https://api.apilayer.com/exchangerates_data")}"
+        "/convert?to={to_currency}&from={from_currency}&amount={amount}"
+    )
     headers = {"apikey": os.getenv("API_KEY")}
 
     try:
